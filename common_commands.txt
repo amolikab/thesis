@@ -1,0 +1,61 @@
+
+//selfsign csr
+
+openssl x509 -req -in rootreq.pem -sha1 -extfile myopenssl.cnf -extensions v3_ca -signkey rootkey.pem -out rootcert.pem
+
+
+//To sign a csr
+
+openssl x509 -req -in serverCAreq.pem -sha1 -extfile myopenssl.cnf -extensions usr_cert -CA root.pem -CAkey root.pem -CAcreateserial -out serverCAcert.pem
+
+//display cert contents:   
+openssl x509 -in trialcert.pem -text
+
+//to display contents of csr
+openssl req -noout -text -in serverreq.pem 
+
+//create a key and csr
+openssl req -newkey rsa:1024 -sha1 -keyout serverCA.pem -out serverCAreq.pem
+
+//signing the csr using root key
+openssl x509 -req -in trialreq.pem -sha1 -extfile openssl.cnf -extensions usr_cert -CA root.pem -CAkey root.pem -CAcreateserial -out trialcert1.pem
+
+//concatinating all info required in one file (to store in the user's program)
+cat trialcert1.pem trialkey.pem rootcert.pem > trial1.pem
+
+//printing subject and issuer to crosscheck
+openssl x509 -subject -issuer -noout -in trial.pem
+
+//to verify private key,cert and csr
+openssl pkey -in clientkey.pem -pubout -outform pem | sha256sum
+Enter pass phrase for clientkey.pem:
+ecc53981cfe1d8e8fb8a70174434d3202f87ab41da2a95ce54b5b2e80efb2b64  -
+
+openssl x509 -in Amolikacert1.pem -pubkey -noout -outform pem | sha256sum 
+ecc53981cfe1d8e8fb8a70174434d3202f87ab41da2a95ce54b5b2e80efb2b64  -
+
+openssl req -in clientreq.pem -pubkey -noout -outform pem | sha256sum
+ecc53981cfe1d8e8fb8a70174434d3202f87ab41da2a95ce54b5b2e80efb2b64  -
+
+
+//serial num of cert
+openssl x509 -in rootcert.pem -serial -noout
+serial=ED9D9E13DC7DAA4E
+
+// -set_serial n
+specifies the serial number to use. This option can be used with either the -signkey or -CA options. If used in conjunction with the -CA option the serial number file (as specified by the -CAserial or -CAcreateserial options) is not used.
+   The serial number can be decimal or hex (if preceded by 0x ). Negative serial numbers can also be specified but their use is not recommended.
+
+
+//reissue cert with the same serial number
+openssl x509 -req -in trialcsr.pem -sha1 -extfile myopenssl.cnf -extensions usr_cert -CA root.pem -CAkey root.pem -set_serial 0xDA4A973DF42F66C0 -out trialcert.pem
+
+
+
+
+
+
+
+
+
+

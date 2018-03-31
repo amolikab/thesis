@@ -1,0 +1,46 @@
+const *char == char can point to different strings and the value of those strings
+                can be changed.
+const char* == although char can point to different thgs, but we cannot change 
+                the contents that the pointer points to.
+                this is used while sending parameters to fcns by reference where we 
+                do not want the fcn to be able to make any changes to those values.
+
+ERR_print_errors_fp == will produce error listing by going thru all the error reports 
+                        in the error queue and putting them in a file pointer(or here,
+                        stderr) after erasing them from the error queue.
+
+exit(-1)   == -1 is considered all 1's in two's complement so exit(-1) tells the program
+                to exit with the highest possible exit code incase scripts have more than
+                1 possible exit status
+                
+fprintf == writes the formatted text to the output stream specified(stdout,stderr, 
+            any file that it is pointed to like *fp )
+
+printf == writes formated text to specifically the standard output stream (ie stdout)
+            printf("") == fprintf(stdout,"")
+            
+%i  == specifies integer
+%d  == specifies unsigned integer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

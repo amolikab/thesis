@@ -1,0 +1,6 @@
+root pass : Utkarsh1992
+ca private key pass: Amolika.18
+intermediate key pass: intermediatekey
+
+
+location of openssl.cnf : /usr/lib/ssl$

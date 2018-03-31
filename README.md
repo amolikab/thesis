@@ -1,5 +1,11 @@
 # thesis
 
+
+program with a running update, re-issue and add client functions
+no multithread included
+separate server client applications
+
+
 certificates
 client:       cert signed by a TCA which is signed by root
               CAFILE :  rootcert //cert trusted by this node and used to verify connections attempting to connect to it.
